@@ -16,16 +16,16 @@ export const SITE = {
       icon: "github" as const,
     },
     {
-      label: "LinkedIn",
-      href: "https://www.linkedin.com/in/mamadoulaminediallo",
-      icon: "linkedin" as const,
-    },
-    {
       label: "GitLab",
       href: "https://gitlab.com/LamineDiallo",
       icon: "gitlab" as const,
     },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/mamadoulaminediallo",
+      icon: "linkedin" as const,
+    },
   ],
 } as const;
 
-export type SocialIcon = "github" | "linkedin" | "gitlab";
+export type SocialIcon = "github" | "gitlab" | "linkedin";
