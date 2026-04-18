@@ -1,0 +1,35 @@
+---
+import { SITE } from "../data/site.ts";
+import IconGitHub from "./icons/IconGitHub.astro";
+import IconLinkedIn from "./icons/IconLinkedIn.astro";
+import IconGitLab from "./icons/IconGitLab.astro";
+
+const iconMap = {
+  github: IconGitHub,
+  linkedin: IconLinkedIn,
+  gitlab: IconGitLab,
+} as const;
+---
+
+<ul class="mt-8 ml-1 flex items-center" aria-label="Social media">
+  {
+    SITE.socials.map((social) => {
+      const Icon = iconMap[social.icon];
+      return (
+        <li class="mr-5 shrink-0 text-xs">
+          <a
+            href={social.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${social.label} (opens in a new tab)`}
+            title={social.label}
+            class="block text-slate-400 transition-colors hover:text-teal-300"
+          >
+            <span class="sr-only">{social.label}</span>
+            <Icon class="size-6" />
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>

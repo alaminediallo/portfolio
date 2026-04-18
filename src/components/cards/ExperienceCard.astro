@@ -1,0 +1,59 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+import Tag from "../ui/Tag.astro";
+import IconArrowUp from "../icons/IconArrowUp.astro";
+
+type Props = {
+  entry: CollectionEntry<"experience">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<li
+  class="group relative grid pb-1 transition-all duration-200 sm:grid-cols-8 sm:gap-8 md:gap-4 lg:group-hover/list:opacity-50 lg:hover:opacity-100! "
+>
+  <div
+    class="lg:group-hover:bg-navy-light absolute -inset-4 z-0 hidden rounded-md transition-all duration-200 lg:block lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"
+  >
+  </div>
+
+  <header
+    class="text-slate z-10 mt-1 mb-2 text-xs font-semibold tracking-wide uppercase sm:col-span-2"
+  >
+    {entry.data.range}
+  </header>
+
+  <div class="z-10 sm:col-span-6">
+    <h3 class="text-slate-lightest leading-snug font-medium">
+      <a
+        class="group/link text-slate-lightest hover:text-teal focus-visible:text-teal inline-flex items-baseline gap-1 leading-tight font-medium"
+        href={entry.data.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span
+          class="absolute -inset-4 hidden rounded md:block"
+          aria-hidden="true"></span>
+        {entry.data.title}
+        <span class="text-slate-lightest inline-block">·</span>
+        {entry.data.company}
+
+        <IconArrowUp
+          class="ml-1 inline-block size-4 shrink-0 translate-y-0.5 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-0.5 group-focus-visible/link:translate-x-1 group-focus-visible/link:-translate-y-0.5"
+        />
+      </a>
+    </h3>
+
+    <div
+      class="prose-sm text-slate [&_a]:text-slate-lightest [&_a:hover]:text-teal [&_a]:decoration-slate/50 mt-2 text-sm leading-normal [&_a]:font-medium [&_a]:underline"
+    >
+      <Content />
+    </div>
+
+    <ul class="mt-5 flex flex-wrap gap-2" aria-label="Technologies used">
+      {entry.data.tech.map((t) => <Tag label={t} />)}
+    </ul>
+  </div>
+</li>

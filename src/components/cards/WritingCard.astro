@@ -1,0 +1,54 @@
+---
+import type { CollectionEntry } from "astro:content";
+import IconArrowUp from "../icons/IconArrowUp.astro";
+
+type Props = {
+  entry: CollectionEntry<"writing">;
+}
+
+const { entry } = Astro.props;
+---
+
+<li
+  class="group relative grid pb-1 transition-all duration-200 sm:grid-cols-8 sm:gap-8 md:gap-4 lg:group-hover/list:opacity-50 lg:hover:opacity-100!"
+>
+  <div
+    class="lg:group-hover:bg-navy-light absolute -inset-4 z-0 hidden rounded-md transition-all duration-200 lg:block lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"
+  >
+  </div>
+
+  <header
+    class="text-slate z-10 mt-1 mb-2 text-xs font-semibold tracking-wide uppercase sm:col-span-2"
+  >
+    {entry.data.year}
+  </header>
+
+  <div class="z-10 sm:col-span-6">
+    <h3 class="leading-snug font-medium">
+      {
+        entry.data.url ? (
+          <a
+            href={entry.data.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group/link text-slate-lightest hover:text-teal focus-visible:text-teal inline-flex items-baseline gap-1 leading-tight font-medium"
+          >
+            <span
+              class="absolute -inset-4 hidden rounded md:block"
+              aria-hidden="true"
+            />
+            {entry.data.title}
+            <IconArrowUp class="ml-1 inline-block size-4 shrink-0 translate-y-0.5 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-0.5 group-focus-visible/link:translate-x-1 group-focus-visible/link:-translate-y-0.5" />
+          </a>
+        ) : (
+          <span class="text-slate-lightest">{entry.data.title}</span>
+        )
+      }
+    </h3>
+    {
+      entry.data.publication && (
+        <p class="text-slate mt-1 text-sm">{entry.data.publication}</p>
+      )
+    }
+  </div>
+</li>

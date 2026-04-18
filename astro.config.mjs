@@ -1,9 +1,28 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://mamadoulaminediallo.com", // TODO: update when domain is known
+  fonts: [
+    {
+      name: "Inter",
+      cssVariable: "--font-inter",
+      provider: fontProviders.bunny(),
+      weights: [400, 500, 600, 700],
+      subsets: ["latin"],
+      display: "swap",
+    },
+    {
+      name: "Inknut Antiqua",
+      cssVariable: "--font-inknut-antiqua",
+      provider: fontProviders.bunny(),
+      weights: [500, 600, 700],
+      subsets: ["latin"],
+      display: "swap",
+    },
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import WritingCard from "../cards/WritingCard.astro";
+
+const entries = await getCollection("writing");
+const sorted = entries.sort((a, b) => a.data.order - b.data.order);
+---
+
+<section
+  id="writing"
+  class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+>
+  <div
+    class="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0"
+  >
+    <h2
+      class="text-slate-lightest text-sm font-bold tracking-widest uppercase lg:sr-only"
+    >
+      Writing
+    </h2>
+  </div>
+
+  <ul class="group/list space-y-8">
+    {sorted.map((entry) => <WritingCard entry={entry} />)}
+  </ul>
+</section>

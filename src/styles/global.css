@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+@theme {
+  /* Color palette */
+  --color-navy: #0a192f;
+  --color-navy-light: #112240;
+  --color-navy-shadow: #020c1b;
+  --color-slate: #a8b2cc;
+  --color-slate-light: #bbc6e4;
+  --color-slate-lightest: #e2e8f0;
+  --color-white: #f0f5ff;
+  --color-teal: #64ffda;
+}
+
+@theme inline {
+  /* CSS vars injected by Astro font API at build time */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-inknut-antiqua);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-900 font-sans text-pretty leading-relaxed text-slate-400 antialiased;
+
+  }
+
+  ::selection {
+    @apply bg-teal-300 text-teal-900;
+  }
+  
+  h1,
+  h2,
+  th {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+}

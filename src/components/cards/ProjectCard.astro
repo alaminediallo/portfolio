@@ -1,0 +1,110 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+import Tag from "../ui/Tag.astro";
+import IconArrowUp from "../icons/IconArrowUp.astro";
+import IconGitHub from "../icons/IconGitHub.astro";
+import IconFolder from "../icons/IconFolder.astro";
+
+type Props = {
+  entry: CollectionEntry<"projects">;
+};
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const cardUrl = entry.data.url || entry.data.github || null;
+---
+
+<li
+  class="group relative grid gap-4 pb-1 transition-all duration-200 sm:grid-cols-8 sm:gap-8 md:gap-4 lg:group-hover/list:opacity-50 lg:hover:opacity-100!"
+>
+  <div
+    class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition-all duration-200 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"
+  >
+  </div>
+
+  <div class="z-10 sm:order-2 sm:col-span-6">
+    <!-- Folder icon row -->
+    <!-- <div class="flex items-start justify-between gap-2"> -->
+    <!-- <IconFolder class="text-teal mt-1 size-10" /> -->
+    <!-- GitHub icon (top-right) -->
+    <!-- {
+        entry.data.github && (
+          <div class="relative z-10">
+            <a
+              href={entry.data.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${entry.data.title} GitHub`}
+              class="text-slate hover:text-teal transition-all hover:translate-x-1 hover:-translate-y-1"
+            >
+              <IconGitHub class="size-5" />
+            </a>
+          </div>
+        )
+      } -->
+    <!-- </div> -->
+
+    <!-- Title with arrow icon inline -->
+    <div class="flex items-start justify-between gap-2">
+      <h3 class="text-slate-lightest leading-snug font-medium">
+        {
+          cardUrl ? (
+            <a
+              href={cardUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group/link text-slate-lightest hover:text-teal focus-visible:text-teal inline-flex items-baseline gap-1 leading-tight font-medium"
+            >
+              <span
+                class="absolute -inset-4 hidden rounded md:block"
+                aria-hidden="true"
+              />
+              {entry.data.title}
+              <IconArrowUp class="ml-1 inline-block size-4 shrink-0 translate-y-0.5 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-0.5 group-focus-visible/link:translate-x-1 group-focus-visible/link:-translate-y-0.5" />
+            </a>
+          ) : (
+            entry.data.title
+          )
+        }
+      </h3>
+      <div>
+        {
+          entry.data.github && (
+            <div class="relative z-10">
+              <a
+                href={entry.data.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${entry.data.title} GitHub`}
+                class="text-slate hover:text-teal transition-all hover:translate-x-1 hover:-translate-y-1"
+              >
+                <IconGitHub class="size-5" />
+              </a>
+            </div>
+          )
+        }
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div
+      class="text-slate [&_a]:text-slate-lightest [&_a:hover]:text-teal mt-2 text-sm leading-normal [&_a]:font-medium"
+    >
+      <Content />
+    </div>
+
+    <!-- Tags -->
+    <ul class="mt-5 flex flex-wrap gap-2" aria-label="Technologies used">
+      {entry.data.tech.map((t) => <Tag label={t} />)}
+    </ul>
+  </div>
+
+  <img
+    src={entry.data.image}
+    alt={entry.data.title}
+    loading="lazy"
+    width="800"
+    height="450"
+    class="z-10 aspect-video w-full rounded border-2 border-slate-200/10 object-cover grayscale transition duration-300 group-hover:border-slate-200/30 group-hover:grayscale-0 sm:order-1 sm:col-span-2 sm:translate-y-1"
+  />
+</li>

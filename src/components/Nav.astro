@@ -1,0 +1,56 @@
+---
+import { SITE } from "../data/site.ts";
+---
+
+<nav aria-label="In-page links">
+  <ul class="mt-12 w-max space-y-1 hidden lg:block">
+    {
+      SITE.nav.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            data-section={item.href.replace("#", "")}
+            class="nav-link group text-slate hover:text-slate-lightest flex items-center gap-4 py-3 text-xs font-bold tracking-widest uppercase transition-all duration-200"
+          >
+            <span class="nav-line bg-slate group-hover:bg-slate-lightest block h-px w-8 transition-all duration-200 group-hover:w-16" />
+            <span class="nav-label">{item.label}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  const sections = document.querySelectorAll<HTMLElement>("section[id]");
+  const navLinks =
+    document.querySelectorAll<HTMLAnchorElement>("a[data-section]");
+
+  function setActive(id: string) {
+    navLinks.forEach((link) => {
+      const isActive = link.getAttribute("data-section") === id;
+      link.classList.toggle("text-slate-lightest", isActive);
+      link.classList.toggle("text-slate", !isActive);
+      const line = link.querySelector<HTMLSpanElement>(".nav-line");
+      if (line) {
+        line.classList.toggle("w-16", isActive);
+        line.classList.toggle("bg-slate-lightest", isActive);
+        line.classList.toggle("w-8", !isActive);
+        line.classList.toggle("bg-slate", !isActive);
+      }
+    });
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" },
+  );
+
+  sections.forEach((s) => observer.observe(s));
+</script>

@@ -1,0 +1,41 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import type { Props as HeadProps } from "../components/BaseHead.astro";
+
+export type Props = HeadProps;
+
+const gcEndpoint = import.meta.env.GOATCOUNTER_ENDPOINT;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead {...Astro.props} />
+  </head>
+  <body>
+    <div
+      id="cursor-glow"
+      class="pointer-events-none fixed inset-0 z-30 transition-[background] duration-300"
+      aria-hidden="true"
+    ></div>
+
+    <slot />
+
+    <script>
+      if (window.matchMedia("(pointer: fine)").matches) {
+        const glow = document.getElementById("cursor-glow");
+        if (glow) {
+          document.addEventListener("mousemove", (e) => {
+            glow.style.background = `radial-gradient(600px at ${e.clientX}px ${e.clientY}px, rgba(29, 78, 216, 0.15), transparent 80%)`;
+          });
+        }
+      }
+    </script>
+
+    {gcEndpoint && (
+      <>
+        <script define:vars={{ gcEndpoint }}>window.goatcounter = { endpoint: gcEndpoint };</script>
+        <script src="/js/gc.min.js" async data-astro-rerun />
+      </>
+    )}
+  </body>
+</html>
