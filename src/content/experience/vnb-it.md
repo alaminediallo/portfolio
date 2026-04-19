@@ -1,6 +1,6 @@
 ---
 company: "VNB-IT"
-title: "Mobile Front-End Developer (React Native)"
+title: "Mobile Front-End Developer"
 url: "https://vnb-it.fr/"
 range: "February 2025 - May 2025"
 date: "2025-02-01"
