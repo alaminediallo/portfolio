@@ -9,6 +9,14 @@ export type ArchiveEntry = {
 
 export const archive: ArchiveEntry[] = [
   {
+    year: 2026,
+    title: "Portfolio",
+    org: "",
+    tech: ["Astro", "TypeScript", "TailwindCSS"],
+    url: "https://laminediallo.me",
+    repo: "https://github.com/alaminediallo/portfolio",
+  },
+  {
     year: 2024,
     title: "Desserts App",
     org: "",
