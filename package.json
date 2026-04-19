@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "screenshots": "node scripts/generate-screenshots.js"
   },
   "dependencies": {
     "astro": "^6.1.8"
@@ -21,9 +22,12 @@
     "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.6.0",
+    "gray-matter": "^4.0.3",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
+    "puppeteer": "^24.41.0",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.2.2"
   }
 }
