@@ -9,7 +9,7 @@ const experience = defineCollection({
     title: z.string(),
     url: z.url(),
     range: z.string(),
-    order: z.number().int(),
+    date: z.coerce.date(),
     tech: z.array(z.string()),
   }),
 });
@@ -23,7 +23,7 @@ const projects = defineCollection({
     github: z.url().optional(),
     image: z.string(),
     tech: z.array(z.string()),
-    order: z.number().int(),
+    date: z.coerce.date(),
   }),
 });
 

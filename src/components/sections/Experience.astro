@@ -5,7 +5,7 @@ import IconArrowUp from "../icons/IconArrowUp.astro";
 import { SITE } from "../../data/site.ts";
 
 const entries = await getCollection("experience");
-const sorted = entries.sort((a, b) => a.data.order - b.data.order);
+const sorted = entries.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <section

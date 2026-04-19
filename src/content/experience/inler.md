@@ -3,7 +3,7 @@ company: "INLER"
 title: "Front-End Web & Mobile Developer"
 url: "https://inler.com"
 range: "May 2025 - Present"
-order: 1
+date: "2025-05-01"
 tech: ["React", "React Native", "TypeScript", "JavaScript", "TailwindCSS"]
 ---
 

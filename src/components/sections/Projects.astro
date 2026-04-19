@@ -6,7 +6,7 @@ import IconArrow from "../icons/IconArrow.astro";
 const allProjects = await getCollection("projects");
 const featured = allProjects
   .filter((p) => p.data.type === "featured")
-  .sort((a, b) => a.data.order - b.data.order);
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <section
