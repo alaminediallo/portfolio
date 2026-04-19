@@ -38,7 +38,7 @@ const { Content } = await render(entry);
           aria-hidden="true"></span>
         {entry.data.title}
         <span class="text-slate-lightest inline-block">·</span>
-        {entry.data.company}
+        <span class="whitespace-nowrap">{entry.data.company}</span>
 
         <IconArrowUp
           class="ml-1 inline-block size-4 shrink-0 translate-y-0.5 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-0.5 group-focus-visible/link:translate-x-1 group-focus-visible/link:-translate-y-0.5"
