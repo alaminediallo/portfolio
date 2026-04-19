@@ -11,7 +11,7 @@ const iconMap = {
 } as const;
 ---
 
-<ul class="mt-8 ml-1 flex items-center" aria-label="Social media">
+<ul class="mt-10 ml-1 flex items-center md:mt-8" aria-label="Social media">
   {
     SITE.socials.map((social) => {
       const Icon = iconMap[social.icon];
