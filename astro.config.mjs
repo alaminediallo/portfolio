@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://mamadoulaminediallo.com", // TODO: update when domain is known
+  site: "https://laminediallo.me",
   fonts: [
     {
       name: "Inter",
