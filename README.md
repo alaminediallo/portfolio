@@ -15,13 +15,13 @@ pnpm dev
 
 Then open `localhost:4321`.
 
-| Command         | Action                          |
-| :-------------- | :------------------------------ |
-| `pnpm dev`      | Start the dev server            |
-| `pnpm build`    | Build the static site to `dist/`|
-| `pnpm preview`  | Preview the production build    |
-| `pnpm lint`     | Run ESLint                      |
-| `pnpm format`   | Format the codebase             |
+| Command        | Action                           |
+| :------------- | :------------------------------- |
+| `pnpm dev`     | Start the dev server             |
+| `pnpm build`   | Build the static site to `dist/` |
+| `pnpm preview` | Preview the production build     |
+| `pnpm lint`    | Run ESLint                       |
+| `pnpm format`  | Format the codebase              |
 
 ## Structure
 

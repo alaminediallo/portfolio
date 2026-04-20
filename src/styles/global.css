@@ -24,8 +24,7 @@
   }
 
   body {
-    @apply bg-slate-900 font-sans text-pretty leading-relaxed text-slate-400 antialiased;
-
+    @apply bg-slate-900 font-sans leading-relaxed text-pretty text-slate-400 antialiased;
   }
 
   ::selection {
