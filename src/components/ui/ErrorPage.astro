@@ -1,0 +1,29 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BackButton from "../BackButton.astro";
+
+export type Props = {
+  headTitle: string;
+  headDescription: string;
+};
+
+const { headTitle, headDescription } = Astro.props;
+---
+
+<Layout title={headTitle} description={headDescription}>
+  <main
+    class="flex min-h-screen flex-col items-center justify-center px-6 py-24 text-center md:px-12"
+  >
+    <h1
+      class="mb-10 text-8xl font-bold tracking-tight text-slate-200 sm:text-9xl"
+    >
+      <slot name="code" />
+    </h1>
+    <p class="mb-10 max-w-md text-slate-400">
+      <slot name="message" />
+    </p>
+    <div class="mt-4">
+      <BackButton href="/" text="Return home" />
+    </div>
+  </main>
+</Layout>
