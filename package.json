@@ -15,7 +15,7 @@
     "screenshots": "node scripts/generate-screenshots.js"
   },
   "dependencies": {
-    "astro": "^6.1.8"
+    "astro": "^6.1.9"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.2",
