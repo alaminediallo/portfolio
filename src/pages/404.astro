@@ -1,0 +1,14 @@
+---
+import ErrorPage from "../components/ui/ErrorPage.astro";
+---
+
+<ErrorPage
+  headTitle="404 | Page Not Found"
+  headDescription="The page you're looking for doesn't exist."
+>
+  <Fragment slot="code">404</Fragment>
+  <Fragment slot="message">
+    You've navigated to a page that doesn't exist. <br />Let's get you back on
+    track.
+  </Fragment>
+</ErrorPage>
