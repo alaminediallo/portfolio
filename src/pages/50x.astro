@@ -1,0 +1,14 @@
+---
+import ErrorPage from "../components/ui/ErrorPage.astro";
+---
+
+<ErrorPage
+  headTitle="500 | Server Error"
+  headDescription="Something went wrong on our end."
+>
+  <Fragment slot="code">500</Fragment>
+  <Fragment slot="message">
+    Something unexpected happened on our end. <br />The server couldn't fulfill
+    your request right now.
+  </Fragment>
+</ErrorPage>
