@@ -1,2 +1,3 @@
 *.yaml
 scripts/generate-screenshots.js
+public/js/*.min.js
