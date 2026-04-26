@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import ProjectCard from "../cards/ProjectCard.astro";
-import IconArrow from "../icons/IconArrow.astro";
+import ProjectCard from "@/components/cards/ProjectCard.astro";
+import IconArrow from "@/components/icons/IconArrow.astro";
 
 const allProjects = await getCollection("projects");
 const featured = allProjects

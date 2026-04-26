@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import ExperienceCard from "../cards/ExperienceCard.astro";
-import IconArrowUp from "../icons/IconArrowUp.astro";
-import { SITE } from "../../data/site.ts";
+import ExperienceCard from "@/components/cards/ExperienceCard.astro";
+import IconArrowUp from "@/components/icons/IconArrowUp.astro";
+import { SITE } from "@/data/site.ts";
 
 const entries = await getCollection("experience");
 const sorted = entries.sort(
