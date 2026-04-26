@@ -3,8 +3,9 @@ import { SITE } from "../data/site.ts";
 
 type Props = {
   href?: string;
+  text?: string;
 };
-const { href = "/" } = Astro.props;
+const { href = "/", text = SITE.name } = Astro.props;
 ---
 
 <a
@@ -25,5 +26,5 @@ const { href = "/" } = Astro.props;
     <line x1="19" y1="12" x2="5" y2="12"></line>
     <polyline points="12 19 5 12 12 5"></polyline>
   </svg>
-  {SITE.name}
+  {text}
 </a>
