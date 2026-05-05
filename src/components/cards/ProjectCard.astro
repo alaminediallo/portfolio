@@ -1,8 +1,9 @@
 ---
-import { type CollectionEntry, render } from "astro:content";
-import Tag from "@/components/ui/Tag.astro";
 import IconArrowUp from "@/components/icons/IconArrowUp.astro";
 import IconGitHub from "@/components/icons/IconGitHub.astro";
+import Tag from "@/components/ui/Tag.astro";
+import { Image } from "astro:assets";
+import { type CollectionEntry, render } from "astro:content";
 
 type Props = {
   entry: CollectionEntry<"projects">;
@@ -81,7 +82,7 @@ const cardUrl = entry.data.url || entry.data.github || null;
     </ul>
   </div>
 
-  <img
+  <Image
     src={entry.data.image}
     alt={entry.data.title}
     loading="lazy"
