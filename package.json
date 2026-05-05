@@ -15,6 +15,7 @@
     "screenshots": "node scripts/generate-screenshots.js"
   },
   "dependencies": {
+    "@yeskunall/astro-umami": "^0.0.8",
     "astro": "^6.1.9"
   },
   "devDependencies": {
@@ -28,6 +29,7 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "puppeteer": "^24.41.0",
     "sharp": "^0.34.5",
-    "tailwindcss": "^4.2.2"
+    "tailwindcss": "^4.2.2",
+    "vite": "^7.3.2"
   }
 }

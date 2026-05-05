@@ -32,6 +32,8 @@ const cardUrl = entry.data.url || entry.data.github || null;
               target="_blank"
               rel="noopener noreferrer"
               class="group/link text-slate-lightest hover:text-teal focus-visible:text-teal inline-flex items-baseline gap-1 leading-tight font-medium"
+              data-umami-event="project-live"
+              data-umami-event-project={entry.data.title}
             >
               <span
                 class="absolute -inset-4 hidden rounded md:block"
@@ -55,6 +57,8 @@ const cardUrl = entry.data.url || entry.data.github || null;
                 rel="noopener noreferrer"
                 aria-label={`${entry.data.title} GitHub`}
                 class="text-slate hover:text-teal transition-all hover:translate-x-1 hover:-translate-y-1"
+                data-umami-event="project-github"
+                data-umami-event-project={entry.data.title}
               >
                 <IconGitHub class="size-5" />
               </a>
