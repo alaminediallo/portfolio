@@ -18,7 +18,7 @@ export default defineConfig({
         umami({
           id: PUBLIC_UMAMI_WEBSITE_ID,
           endpointUrl: "https://bip.laminediallo.me",
-          trackerScriptName: "bip.js",
+          trackerScriptName: "bip",
           domains: ["laminediallo.me"],
           autotrack: true,
         }),
