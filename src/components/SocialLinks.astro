@@ -3,11 +3,13 @@ import { SITE } from "@/data/site.ts";
 import IconGitHub from "./icons/IconGitHub.astro";
 import IconLinkedIn from "./icons/IconLinkedIn.astro";
 import IconGitLab from "./icons/IconGitLab.astro";
+import IconEmail from "./icons/IconEmail.astro";
 
 const iconMap = {
   github: IconGitHub,
   gitlab: IconGitLab,
   linkedin: IconLinkedIn,
+  email: IconEmail,
 } as const;
 ---
 
@@ -15,13 +17,18 @@ const iconMap = {
   {
     SITE.socials.map((social) => {
       const Icon = iconMap[social.icon];
+      const isMailto = social.href.startsWith("mailto:");
       return (
         <li class="mr-5 shrink-0 text-xs">
           <a
             href={social.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${social.label} (opens in a new tab)`}
+            target={isMailto ? undefined : "_blank"}
+            rel={isMailto ? undefined : "noopener noreferrer"}
+            aria-label={
+              isMailto
+                ? `Email ${social.label} (opens email client)`
+                : `${social.label} (opens in a new tab)`
+            }
             title={social.label}
             class="block text-slate-400 transition-colors hover:text-teal-300"
           >

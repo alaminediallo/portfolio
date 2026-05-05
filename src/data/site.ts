@@ -25,7 +25,12 @@ export const SITE = {
       href: "https://www.linkedin.com/in/mamadoulaminediallo",
       icon: "linkedin" as const,
     },
+    {
+      label: "Email",
+      href: "mailto:laminediallo07565@gmail.com?subject=Hello%20Lamine",
+      icon: "email" as const,
+    },
   ],
 } as const;
 
-export type SocialIcon = "github" | "gitlab" | "linkedin";
+export type SocialIcon = "github" | "gitlab" | "linkedin" | "email";
