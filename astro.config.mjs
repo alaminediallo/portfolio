@@ -34,6 +34,12 @@ export default defineConfig({
         }),
       ]
     : [],
+  redirects: {
+    "/li": "/?utm_source=linkedin&utm_medium=bio",
+    "/gh": "/?utm_source=github&utm_medium=profile",
+    "/gl": "/?utm_source=gitlab&utm_medium=bio",
+    "/dc": "/?utm_source=discord&utm_medium=bio",
+  },
   fonts: [
     {
       name: "Inter",
