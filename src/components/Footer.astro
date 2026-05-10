@@ -1,19 +1,22 @@
 ---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <footer class="text-sm text-slate-400">
   <p>
-    Loosely designed &amp; built by{" "}
+    {t("footer.designedBy")}{" "}
     <a
       href="https://brittanychiang.com"
       target="_blank"
       rel="noopener noreferrer"
       class="font-medium text-slate-200 hover:text-teal-300"
     >
-      Brittany Chiang.
+      {t("footer.brittany")}
     </a>
-    Recreated with inspiration using{" "}
+    {" "}{t("footer.recreated")}{" "}
     <a
       href="https://astro.build"
       target="_blank"
@@ -22,7 +25,7 @@
     >
       Astro
     </a>
-    {" "}&amp;{" "}
+    {" "}{t("footer.and")}{" "}
     <a
       href="https://tailwindcss.com"
       target="_blank"

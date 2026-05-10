@@ -1,13 +1,18 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import BackButton from "@/components/BackButton.astro";
+import { getLangFromUrl, useTranslations, type Lang } from "@/i18n/utils";
 
 export type Props = {
   headTitle: string;
   headDescription: string;
+  lang?: Lang;
 };
 
-const { headTitle, headDescription } = Astro.props;
+const { headTitle, headDescription, lang: langProp } = Astro.props;
+
+const lang = langProp ?? getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Layout title={headTitle} description={headDescription}>
@@ -23,7 +28,7 @@ const { headTitle, headDescription } = Astro.props;
       <slot name="message" />
     </p>
     <div class="mt-4">
-      <BackButton href="/" text="Return home" />
+      <BackButton text={t("error.returnHome")} lang={lang} />
     </div>
   </main>
 </Layout>

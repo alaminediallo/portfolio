@@ -1,14 +1,15 @@
 ---
 import ErrorPage from "@/components/ui/ErrorPage.astro";
-import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { useTranslations } from "@/i18n/utils";
 
-const lang = getLangFromUrl(Astro.url);
+const lang = "fr" as const;
 const t = useTranslations(lang);
 ---
 
 <ErrorPage
   headTitle={t("error.404.headTitle")}
   headDescription={t("error.404.headDescription")}
+  lang={lang}
 >
   <Fragment slot="code">404</Fragment>
   <Fragment slot="message">

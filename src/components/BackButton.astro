@@ -1,11 +1,16 @@
 ---
 import { SITE } from "@/data/site.ts";
+import { getLangFromUrl, localizedPath, type Lang } from "@/i18n/utils";
 
 type Props = {
   href?: string;
   text?: string;
+  lang?: Lang;
 };
-const { href = "/", text = SITE.name } = Astro.props;
+
+const { lang: langProp, ...rest } = Astro.props;
+const lang = langProp ?? getLangFromUrl(Astro.url);
+const { href = localizedPath(lang, "/"), text = SITE.name } = rest;
 ---
 
 <a

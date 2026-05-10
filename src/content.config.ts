@@ -27,15 +27,20 @@ const projects = defineCollection({
   }),
 });
 
-const writing = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/writing" }),
-  schema: z.object({
-    title: z.string(),
-    year: z.number().int(),
-    url: z.url().optional(),
-    publication: z.string().optional(),
-    order: z.number().int(),
-  }),
+// const writing = defineCollection({
+//   loader: glob({ pattern: "**/*.md", base: "./src/content/writing" }),
+//   schema: z.object({
+//     title: z.string(),
+//     year: z.number().int(),
+//     url: z.url().optional(),
+//     publication: z.string().optional(),
+//     order: z.number().int(),
+//   }),
+// });
+
+const about = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/about" }),
+  schema: z.object({}),
 });
 
-export const collections = { experience, projects, writing };
+export const collections = { experience, projects, about };
