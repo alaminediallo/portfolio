@@ -15,8 +15,10 @@
     "screenshots": "node scripts/generate-screenshots.js"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.9",
     "@yeskunall/astro-umami": "^0.0.8",
-    "astro": "^6.1.9"
+    "astro": "^6.3.1",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.2",

@@ -1,5 +1,15 @@
 ---
+import { getEntry, render } from "astro:content";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const aboutEntry = await getEntry("about", lang);
+if (!aboutEntry) {
+  throw new Error(`Missing about content for locale "${lang}"`);
+}
+const { Content } = await render(aboutEntry);
 ---
 
 <section
@@ -12,58 +22,11 @@
     <h2
       class="text-slate-lightest text-sm font-bold tracking-widest uppercase lg:sr-only"
     >
-      About
+      {t("section.about.heading")}
     </h2>
   </div>
 
   <div class="space-y-4 text-base leading-relaxed">
-    <p>
-      I'm a Front-End developer focused on React and React Native, with Laravel
-      on the backend when I need it. I work on both web interfaces and
-      iOS/Android mobile apps, from design integration all the way to
-      performance optimization.
-    </p>
-
-    <p>
-      Currently, I'm at{" "}
-      <a href="" class="text-slate-lightest hover:text-teal font-medium">
-        INLER
-      </a>
-      {" "}working remotely, where I build React web interfaces and mobile apps
-      with React Native. Before that, I did an internship at{" "}
-      <a
-        href="https://vnb-it.fr"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-slate-lightest hover:text-teal font-medium"
-        data-umami-event="about-link"
-        data-umami-event-target="vnb-it"
-      >
-        VNB-IT
-      </a>
-      {" "}where I built a complete mobile app in 3 months.
-    </p>
-
-    <p>
-      Alongside work, I'm pursuing a Master's degree in Software Engineering at{
-        " "
-      }
-      <a
-        href="https://groupeisi.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-slate-lightest hover:text-teal font-medium"
-        data-umami-event="about-link"
-        data-umami-event-target="isi"
-      >
-        Groupe ISI
-      </a>
-      {" "}in Dakar.
-    </p>
-
-    <p>
-      When I'm not coding, you'll probably find me reading manhwa, keeping up
-      with the F1 season, or catching up on anime.
-    </p>
+    <Content />
   </div>
 </section>

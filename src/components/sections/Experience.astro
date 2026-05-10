@@ -2,9 +2,15 @@
 import { getCollection } from "astro:content";
 import ExperienceCard from "@/components/cards/ExperienceCard.astro";
 import IconArrowUp from "@/components/icons/IconArrowUp.astro";
-import { SITE } from "@/data/site.ts";
+import { SITE } from "@/data/site";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
-const entries = await getCollection("experience");
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const entries = await getCollection("experience", (entry) =>
+  entry.id.startsWith(`${lang}/`),
+);
 const sorted = entries.sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
@@ -20,7 +26,7 @@ const sorted = entries.sort(
     <h2
       class="text-slate-lightest text-sm font-bold tracking-widest uppercase lg:sr-only"
     >
-      Experience
+      {t("section.experience.heading")}
     </h2>
   </div>
 
@@ -34,10 +40,10 @@ const sorted = entries.sort(
       target="_blank"
       rel="noopener noreferrer"
       class="group text-slate-lightest hover:text-teal inline-flex items-center gap-1 font-semibold"
-      aria-label="View Full Résumé (opens in a new tab)"
+      aria-label={t("section.experience.viewResume.aria")}
       data-umami-event="resume-download"
     >
-      View Full Résumé
+      {t("section.experience.viewResume")}
       <IconArrowUp
         class="size-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
       />

@@ -13,6 +13,16 @@ const { PUBLIC_UMAMI_WEBSITE_ID } = loadEnv(
 // https://astro.build/config
 export default defineConfig({
   site: "https://laminediallo.me",
+  i18n: {
+    locales: ["en", "fr"],
+    defaultLocale: "en",
+    routing: {
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: false,
+      fallbackType: "rewrite",
+    },
+    fallback: { fr: "en" },
+  },
   integrations: PUBLIC_UMAMI_WEBSITE_ID
     ? [
         umami({

@@ -1,7 +1,12 @@
 ---
 import "@/styles/global.css";
-import { SITE } from "@/data/site.ts";
+import { SITE } from "@/data/site";
 import { Font } from "astro:assets";
+import {
+  alternatePath,
+  getLangFromUrl,
+  useTranslations,
+} from "@/i18n/utils";
 
 export type Props = {
   title?: string;
@@ -9,14 +14,19 @@ export type Props = {
   image?: string;
 };
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const {
-  title = `${SITE.name} | ${SITE.title}`,
-  description = SITE.tagline,
+  title = `${SITE.name} | ${t("site.title")}`,
+  description = t("site.tagline"),
   image = "/images/og/og-image.png",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
+const enHref = new URL(alternatePath(Astro.url, "en"), Astro.site);
+const frHref = new URL(alternatePath(Astro.url, "fr"), Astro.site);
 ---
 
 <meta charset="utf-8" />
@@ -24,7 +34,29 @@ const ogImage = new URL(image, Astro.site);
 <meta name="theme-color" content="#0a192f" />
 <meta name="color-scheme" content="dark" />
 
+<script is:inline>
+  (function () {
+    try {
+      var pref = localStorage.getItem("lang-pref");
+      if (pref) return;
+      var path = location.pathname;
+      var alreadyFr = path === "/fr" || path.indexOf("/fr/") === 0;
+      var navLang = (navigator.language || "").toLowerCase();
+      if (navLang.indexOf("fr") === 0 && !alreadyFr) {
+        localStorage.setItem("lang-pref", "fr");
+        var target = "/fr" + (path === "/" ? "" : path);
+        location.replace(target);
+      }
+    } catch (e) {
+      /* localStorage indispo : ne rien faire */
+    }
+  })();
+</script>
+
 <link rel="canonical" href={canonicalURL} />
+<link rel="alternate" hreflang="en" href={enHref} />
+<link rel="alternate" hreflang="fr" href={frHref} />
+<link rel="alternate" hreflang="x-default" href={enHref} />
 
 <title>{title}</title>
 <meta name="description" content={description} />
@@ -37,7 +69,7 @@ const ogImage = new URL(image, Astro.site);
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImage} />
-<meta property="og:locale" content="en_US" />
+<meta property="og:locale" content={t("html.locale")} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />

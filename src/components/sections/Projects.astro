@@ -2,11 +2,23 @@
 import { getCollection } from "astro:content";
 import ProjectCard from "@/components/cards/ProjectCard.astro";
 import IconArrow from "@/components/icons/IconArrow.astro";
+import {
+  getLangFromUrl,
+  localizedPath,
+  useTranslations,
+} from "@/i18n/utils";
 
-const allProjects = await getCollection("projects");
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const allProjects = await getCollection("projects", (entry) =>
+  entry.id.startsWith(`${lang}/`),
+);
 const featured = allProjects
   .filter((p) => p.data.type === "featured")
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const archiveHref = localizedPath(lang, "/archive");
 ---
 
 <section
@@ -19,7 +31,7 @@ const featured = allProjects
     <h2
       class="text-slate-lightest text-sm font-bold tracking-widest uppercase lg:sr-only"
     >
-      Projects
+      {t("section.projects.heading")}
     </h2>
   </div>
 
@@ -29,11 +41,11 @@ const featured = allProjects
 
   <div class="mt-12">
     <a
-      href="/archive"
+      href={archiveHref}
       class="group text-slate-lightest hover:text-teal inline-flex items-center gap-1 font-semibold"
       data-umami-event="archive-view"
     >
-      View Full Project Archive
+      {t("section.projects.viewArchive")}
       <IconArrow
         class="size-4 transition-transform group-hover:translate-x-1"
       />

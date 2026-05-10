@@ -4,6 +4,7 @@ import IconGitHub from "@/components/icons/IconGitHub.astro";
 import Tag from "@/components/ui/Tag.astro";
 import { Image } from "astro:assets";
 import { type CollectionEntry, render } from "astro:content";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
 type Props = {
   entry: CollectionEntry<"projects">;
@@ -12,6 +13,9 @@ type Props = {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const cardUrl = entry.data.url || entry.data.github || null;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <li
@@ -56,7 +60,7 @@ const cardUrl = entry.data.url || entry.data.github || null;
                 href={entry.data.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${entry.data.title} GitHub`}
+                aria-label={t("card.github.aria", { title: entry.data.title })}
                 class="text-slate hover:text-teal transition-all hover:translate-x-1 hover:-translate-y-1"
                 data-umami-event="project-github"
                 data-umami-event-project={entry.data.title}
@@ -77,8 +81,8 @@ const cardUrl = entry.data.url || entry.data.github || null;
     </div>
 
     <!-- Tags -->
-    <ul class="mt-5 flex flex-wrap gap-2" aria-label="Technologies used">
-      {entry.data.tech.map((t) => <Tag label={t} />)}
+    <ul class="mt-5 flex flex-wrap gap-2" aria-label={t("tech.aria")}>
+      {entry.data.tech.map((tech) => <Tag label={tech} />)}
     </ul>
   </div>
 

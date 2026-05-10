@@ -1,13 +1,13 @@
+import type { UIKey } from "@/i18n/ui";
+
 export const SITE = {
   name: "Mamadou Lamine Diallo",
-  title: "Web & Mobile Developer",
-  tagline: "I build clean, performant, user-focused web and mobile interfaces.",
   resumeUrl: "cv/resume.pdf",
   nav: [
-    { label: "About", href: "#about" },
-    { label: "Experience", href: "#experience" },
-    { label: "Projects", href: "#projects" },
-    // { label: "Writing", href: "#writing" },
+    { key: "nav.about" as UIKey, href: "#about" },
+    { key: "nav.experience" as UIKey, href: "#experience" },
+    { key: "nav.projects" as UIKey, href: "#projects" },
+    // { key: "nav.writing" as UIKey, href: "#writing" },
   ],
   socials: [
     {

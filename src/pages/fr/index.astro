@@ -1,0 +1,34 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Sidebar from "@/components/Sidebar.astro";
+import About from "@/components/sections/About.astro";
+import Experience from "@/components/sections/Experience.astro";
+import Projects from "@/components/sections/Projects.astro";
+import Footer from "@/components/Footer.astro";
+// import Writing from "@/components/sections/Writing.astro";
+---
+
+<Layout>
+  <div
+    class="mx-auto min-h-screen max-w-7xl px-6 py-12 font-sans md:px-12 md:py-16 lg:py-0"
+  >
+    <div class="lg:flex lg:justify-between lg:gap-4">
+      <!-- LEFT: Sticky sidebar -->
+      <header
+        class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[45%] lg:flex-col lg:justify-between lg:py-24"
+      >
+        <Sidebar />
+      </header>
+
+      <!-- RIGHT: Scrollable content -->
+      <main class="pt-24 lg:w-[55%] lg:py-24">
+        <About />
+        <Experience />
+        <Projects />
+        {/* <Writing /> */}
+
+        <Footer />
+      </main>
+    </div>
+  </div>
+</Layout>

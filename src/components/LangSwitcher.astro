@@ -1,0 +1,63 @@
+---
+import {
+  alternatePath,
+  getLangFromUrl,
+  useTranslations,
+} from "@/i18n/utils";
+import { languages } from "@/i18n/ui";
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+
+const entries = (Object.keys(languages) as Array<keyof typeof languages>).map(
+  (lang) => ({
+    lang,
+    href: alternatePath(Astro.url, lang),
+    label: lang.toUpperCase(),
+    full: languages[lang],
+    isActive: lang === currentLang,
+  }),
+);
+---
+
+<nav aria-label={t("lang.aria")} class="mt-6">
+  <div
+    class="border-slate/30 inline-flex border text-xs font-bold tracking-widest uppercase"
+  >
+    {
+      entries.map((entry) => (
+        <a
+          href={entry.href}
+          data-lang={entry.lang}
+          aria-current={entry.isActive ? "true" : undefined}
+          aria-label={entry.full}
+          class:list={[
+            "lang-switch-link px-3 py-1 transition-colors",
+            entry.isActive
+              ? "bg-slate-lightest text-navy"
+              : "text-slate hover:bg-slate/10 hover:text-slate-lightest",
+          ]}
+        >
+          {entry.label}
+        </a>
+      ))
+    }
+  </div>
+</nav>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>(".lang-switch-link").forEach(
+    (link) => {
+      link.addEventListener("click", () => {
+        const lang = link.getAttribute("data-lang");
+        if (lang) {
+          try {
+            localStorage.setItem("lang-pref", lang);
+          } catch (e) {
+            /* localStorage indispo */
+          }
+        }
+      });
+    },
+  );
+</script>

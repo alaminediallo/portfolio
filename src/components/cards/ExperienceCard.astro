@@ -2,6 +2,7 @@
 import { type CollectionEntry, render } from "astro:content";
 import Tag from "@/components/ui/Tag.astro";
 import IconArrowUp from "@/components/icons/IconArrowUp.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
 type Props = {
   entry: CollectionEntry<"experience">;
@@ -9,6 +10,9 @@ type Props = {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <li
@@ -55,8 +59,8 @@ const { Content } = await render(entry);
       <Content />
     </div>
 
-    <ul class="mt-5 flex flex-wrap gap-2" aria-label="Technologies used">
-      {entry.data.tech.map((t) => <Tag label={t} />)}
+    <ul class="mt-5 flex flex-wrap gap-2" aria-label={t("tech.aria")}>
+      {entry.data.tech.map((tech) => <Tag label={tech} />)}
     </ul>
   </div>
 </li>
