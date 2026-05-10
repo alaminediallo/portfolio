@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import ExperienceCard from "@/components/cards/ExperienceCard.astro";
 import IconArrowUp from "@/components/icons/IconArrowUp.astro";
-import { SITE } from "@/data/site.ts";
+import { SITE } from "@/data/site";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);

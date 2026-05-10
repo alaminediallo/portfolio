@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { archive } from "@/data/archive.ts";
+import { archive } from "@/data/archive";
 import IconArrowUp from "@/components/icons/IconArrowUp.astro";
 import IconGitHub from "@/components/icons/IconGitHub.astro";
 import BackButton from "@/components/BackButton.astro";
@@ -32,7 +32,7 @@ const t = useTranslations(lang);
           <th class="py-4 pr-8 text-sm font-semibold text-slate-200">{t("archive.col.project")}</th>
           <th class="hidden py-4 pr-8 text-sm font-semibold text-slate-200 lg:table-cell">{t("archive.col.madeAt")}</th>
           <th class="hidden py-4 pr-8 text-sm font-semibold text-slate-200 lg:table-cell">{t("archive.col.builtWith")}</th>
-          <th class="hidden py-4 pr-8 text-sm font-semibold text-slate-200 sm:table-cell">{t("archive.col.link")}</th>
+          <th class="hidden py-4 pr-8 text-sm font-semibold text-slate-200 sm:table-cell">{t("archive.col.links")}</th>
         </tr>
       </thead>
       <tbody>
