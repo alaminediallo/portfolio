@@ -32,5 +32,37 @@ const lang = getLangFromUrl(Astro.url);
         }
       }
     </script>
+    <script is:inline>
+      const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+      const FALLBACK_DELAY = 3000;
+      const POLL_INTERVAL = 50;
+
+      function cleanUtmFromUrl() {
+        const url = new URL(window.location.href);
+        const hasUtm = UTM_KEYS.some(key => url.searchParams.has(key));
+        if (!hasUtm) return;
+
+        UTM_KEYS.forEach(key => url.searchParams.delete(key));
+        window.history.replaceState({}, document.title, url.toString());
+      }
+
+      function waitForUmamiThenClean() {
+        if (window.umami) return cleanUtmFromUrl();
+
+        const interval = setInterval(() => {
+          if (window.umami) {
+            clearInterval(interval);
+            cleanUtmFromUrl();
+          }
+        }, POLL_INTERVAL);
+
+        setTimeout(() => {
+          clearInterval(interval);
+          cleanUtmFromUrl();
+        }, FALLBACK_DELAY);
+      }
+
+      window.addEventListener('load', waitForUmamiThenClean);
+  </script>
   </body>
 </html>
