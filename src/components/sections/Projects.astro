@@ -2,11 +2,7 @@
 import { getCollection } from "astro:content";
 import ProjectCard from "@/components/cards/ProjectCard.astro";
 import IconArrow from "@/components/icons/IconArrow.astro";
-import {
-  getLangFromUrl,
-  localizedPath,
-  useTranslations,
-} from "@/i18n/utils";
+import { getLangFromUrl, localizedPath, useTranslations } from "@/i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

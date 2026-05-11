@@ -38,8 +38,7 @@ export const ui = {
     "error.returnHome": "Return home",
     "error.404.headTitle": "404 | Page Not Found",
     "error.404.headDescription": "The page you're looking for doesn't exist.",
-    "error.404.message.line1":
-      "You've navigated to a page that doesn't exist.",
+    "error.404.message.line1": "You've navigated to a page that doesn't exist.",
     "error.404.message.line2": "Let's get you back on track.",
     "error.500.headTitle": "500 | Server Error",
     "error.500.headDescription": "Something went wrong on our end.",

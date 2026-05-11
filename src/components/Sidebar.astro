@@ -3,11 +3,7 @@ import { SITE } from "@/data/site";
 import Nav from "./Nav.astro";
 import SocialLinks from "./SocialLinks.astro";
 import LangSwitcher from "./LangSwitcher.astro";
-import {
-  getLangFromUrl,
-  localizedPath,
-  useTranslations,
-} from "@/i18n/utils";
+import { getLangFromUrl, localizedPath, useTranslations } from "@/i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

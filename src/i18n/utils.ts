@@ -30,7 +30,8 @@ export function localizedPath(lang: Lang, path: string): string {
 
 export function alternatePath(currentUrl: URL, targetLang: Lang): string {
   const segments = currentUrl.pathname.split("/").filter(Boolean);
-  const stripped = segments[0] && isLang(segments[0]) ? segments.slice(1) : segments;
+  const stripped =
+    segments[0] && isLang(segments[0]) ? segments.slice(1) : segments;
   const rest = stripped.length === 0 ? "/" : `/${stripped.join("/")}`;
   return localizedPath(targetLang, rest);
 }

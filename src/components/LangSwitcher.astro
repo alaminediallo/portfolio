@@ -1,9 +1,5 @@
 ---
-import {
-  alternatePath,
-  getLangFromUrl,
-  useTranslations,
-} from "@/i18n/utils";
+import { alternatePath, getLangFromUrl, useTranslations } from "@/i18n/utils";
 import { languages } from "@/i18n/ui";
 
 const currentLang = getLangFromUrl(Astro.url);
@@ -46,8 +42,9 @@ const entries = (Object.keys(languages) as Array<keyof typeof languages>).map(
 </nav>
 
 <script>
-  document.querySelectorAll<HTMLAnchorElement>(".lang-switch-link").forEach(
-    (link) => {
+  document
+    .querySelectorAll<HTMLAnchorElement>(".lang-switch-link")
+    .forEach((link) => {
       link.addEventListener("click", () => {
         const lang = link.getAttribute("data-lang");
         if (lang) {
@@ -58,6 +55,5 @@ const entries = (Object.keys(languages) as Array<keyof typeof languages>).map(
           }
         }
       });
-    },
-  );
+    });
 </script>
