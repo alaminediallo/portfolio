@@ -1,6 +1,8 @@
 # Portfolio
 
-Personal portfolio of Mamadou Lamine Diallo, live at [laminediallo.me](https://laminediallo.me). A quiet, content-first single page that lists what I've built, where I've worked, and how to reach me. The home is a sticky sidebar paired with a scrolling main column; the archive page is a dense table of every project that has shipped.
+Personal portfolio of Mamadou Lamine Diallo, live at [laminediallo.me](https://bip.laminediallo.me/q/gl). A quiet, 
+content-first 
+single page that lists what I've built, where I've worked, and how to reach me. The home is a sticky sidebar paired with a scrolling main column; the archive page is a dense table of every project that has shipped.
 
 ## Stack
 
