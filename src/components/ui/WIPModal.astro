@@ -1,0 +1,157 @@
+<div
+  id="wip-modal"
+  class="fixed inset-0 z-50 items-center justify-center p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="wip-modal-title"
+>
+  <div id="wip-backdrop" class="absolute inset-0 bg-slate-900/75 backdrop-blur" />
+
+  <div
+    class="wip-card relative w-full max-w-sm rounded-lg border border-slate-300/10 bg-slate-900/75 p-6 shadow-2xl"
+  >
+    <div class="mb-4 flex items-center gap-3">
+      <div
+        class="bg-teal/10 flex size-10 shrink-0 items-center justify-center rounded-full"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="text-teal size-5"
+          aria-hidden="true"
+        >
+          <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path>
+          <path d="M7 2v20"></path>
+          <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path>
+        </svg>
+      </div>
+
+      <h2
+        id="wip-modal-title"
+        class="text-slate-lightest font-display text-lg font-semibold"
+      >
+        <span data-wip-lang="en">We're cooking</span>
+        <span data-wip-lang="fr" class="hidden">Ça mijote</span>
+      </h2>
+    </div>
+
+    <p class="text-slate mb-6 text-sm leading-relaxed">
+      <span data-wip-lang="en">INLER's website is on its way. Stay tuned!</span>
+      <span data-wip-lang="fr" class="hidden">Le site d'INLER arrive bientôt. Stay tuned !</span>
+    </p>
+
+    <button
+      id="wip-close"
+      class="text-teal border-teal/30 hover:bg-teal/10 focus-visible:ring-teal/50 w-full cursor-pointer rounded border px-4 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none"
+    >
+      <span data-wip-lang="en">Got it</span>
+      <span data-wip-lang="fr" class="hidden">Compris</span>
+    </button>
+  </div>
+</div>
+
+<style>
+  #wip-modal {
+    display: none;
+    transition: display 280ms allow-discrete;
+  }
+
+  #wip-modal.is-open {
+    display: flex;
+  }
+
+  #wip-backdrop {
+    opacity: 0;
+    transition: opacity 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  #wip-modal.is-open #wip-backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    #wip-modal.is-open #wip-backdrop {
+      opacity: 0;
+    }
+  }
+
+  #wip-modal .wip-card {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  #wip-modal.is-open .wip-card {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 30ms,
+      transform 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 30ms;
+  }
+
+  @starting-style {
+    #wip-modal.is-open .wip-card {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #wip-backdrop,
+    #wip-modal .wip-card {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const modal = document.getElementById("wip-modal")!;
+  const backdrop = document.getElementById("wip-backdrop")!;
+  const closeBtn = document.getElementById("wip-close")!;
+
+  function getLang(): string {
+    return document.documentElement.lang || "en";
+  }
+
+  function syncLang() {
+    const lang = getLang();
+    document.querySelectorAll("[data-wip-lang]").forEach((el) => {
+      const elLang = (el as HTMLElement).dataset.wipLang;
+      el.classList.toggle("hidden", elLang !== lang);
+    });
+  }
+
+  function show() {
+    syncLang();
+    modal.classList.add("is-open");
+    closeBtn.focus();
+  }
+
+  function hide() {
+    modal.classList.remove("is-open");
+  }
+
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    if (target.closest("[data-wip]")) {
+      e.preventDefault();
+      show();
+    }
+  });
+
+  backdrop.addEventListener("click", hide);
+  closeBtn.addEventListener("click", hide);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) {
+      hide();
+    }
+  });
+</script>
