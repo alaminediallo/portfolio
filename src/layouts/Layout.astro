@@ -1,6 +1,7 @@
 ---
 import BaseHead from "@/components/BaseHead.astro";
 import type { Props as HeadProps } from "@/components/BaseHead.astro";
+import WIPModal from "@/components/ui/WIPModal.astro";
 import { getLangFromUrl } from "@/i18n/utils";
 
 export type Props = HeadProps;
@@ -21,6 +22,8 @@ const lang = getLangFromUrl(Astro.url);
     </div>
 
     <slot />
+
+    <WIPModal />
 
     <script>
       if (window.matchMedia("(pointer: fine)").matches) {
