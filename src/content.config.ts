@@ -11,6 +11,7 @@ const experience = defineCollection({
     range: z.string(),
     date: z.coerce.date(),
     tech: z.array(z.string()),
+    wip: z.boolean().optional(),
   }),
 });
 
