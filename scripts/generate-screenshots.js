@@ -7,13 +7,28 @@ import { dirname, join } from "node:path";
 const PROJECTS_DIR = "src/content/projects";
 const PUBLIC_DIR = "public";
 
-const files = readdirSync(PROJECTS_DIR).filter((f) => f.endsWith(".md"));
+function walkMd(dir) {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) return walkMd(full);
+    if (entry.isFile() && entry.name.endsWith(".md")) return [full];
+    return [];
+  });
+}
+
+const files = walkMd(PROJECTS_DIR);
+const seen = new Set();
 const projects = files
   .map((f) => {
-    const { data } = matter(readFileSync(join(PROJECTS_DIR, f), "utf8"));
+    const { data } = matter(readFileSync(f, "utf8"));
     return { title: data.title, url: data.url, image: data.image };
   })
-  .filter((p) => p.url && p.image);
+  .filter((p) => p.url && p.image)
+  .filter((p) => {
+    if (seen.has(p.image)) return false;
+    seen.add(p.image);
+    return true;
+  });
 
 const browser = await puppeteer.launch();
 
