@@ -10,9 +10,11 @@ const t = useTranslations(lang);
 const allProjects = await getCollection("projects", (entry) =>
   entry.id.startsWith(`${lang}/`),
 );
+const FEATURED_LIMIT = 4;
 const featured = allProjects
   .filter((p) => p.data.type === "featured")
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, FEATURED_LIMIT);
 
 const archiveHref = localizedPath(lang, "/archive");
 ---
