@@ -4,7 +4,7 @@ title: "Développeur Front-End Web & Mobile"
 url: "https://laminediallo.me"
 range: "Mai 2025 - aujourd'hui"
 date: "2025-05-01"
-tech: ["React", "React Native", "TypeScript", "JavaScript", "TailwindCSS"]
+tech: ["React", "React Native", "Expo", "TypeScript", "TailwindCSS"]
 wip: true
 ---
 
