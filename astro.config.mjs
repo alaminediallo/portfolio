@@ -2,9 +2,12 @@
 import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://laminediallo.me",
+
   i18n: {
     locales: ["en", "fr"],
     defaultLocale: "en",
@@ -15,6 +18,7 @@ export default defineConfig({
     },
     fallback: { fr: "en" },
   },
+
   fonts: [
     {
       name: "Inter",
@@ -33,7 +37,14 @@ export default defineConfig({
       display: "swap",
     },
   ],
+
   vite: {
     plugins: [tailwindcss()],
   },
+
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes("/404") && !page.includes("/50x"),
+    }),
+  ],
 });
