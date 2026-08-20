@@ -14,9 +14,14 @@ const t = useTranslations(lang);
           <a
             href={item.href}
             data-section={item.href.replace("#", "")}
-            class="nav-link group text-slate hover:text-slate-lightest flex items-center gap-4 py-3 text-xs font-bold tracking-widest uppercase transition-all duration-200"
+            class="nav-link group focus-ring text-slate hover:text-slate-lightest data-active:text-slate-lightest ease-out-quad flex items-center gap-4 py-3 text-xs font-bold tracking-widest uppercase transition-[color] duration-150"
           >
-            <span class="nav-line bg-slate group-hover:bg-slate-lightest block h-px w-8 transition-all duration-200 group-hover:w-16" />
+            {/* Base width is the expanded size; the resting state is a scaleX, so
+                the indicator animates on the compositor instead of triggering
+                layout the way an animated `width` would. Tailwind v4 compiles
+                scale-* to the standalone `scale` property, hence the
+                transition targets `scale` rather than `transform`. */}
+            <span class="nav-line bg-slate group-hover:bg-slate-lightest group-data-active:bg-slate-lightest ease-out-quad block h-px w-16 origin-left scale-x-50 transition-[scale,background-color] duration-200 group-hover:scale-x-100 group-data-active:scale-x-100" />
             <span class="nav-label">{t(item.key)}</span>
           </a>
         </li>
@@ -26,35 +31,62 @@ const t = useTranslations(lang);
 </nav>
 
 <script>
-  const sections = document.querySelectorAll<HTMLElement>("section[id]");
-  const navLinks =
-    document.querySelectorAll<HTMLAnchorElement>("a[data-section]");
+  /** Matches the top edge of the IntersectionObserver band below. */
+  const BAND_TOP_RATIO = 0.4;
+  const ROOT_MARGIN = "-40% 0px -55% 0px";
 
-  function setActive(id: string) {
-    navLinks.forEach((link) => {
-      const isActive = link.getAttribute("data-section") === id;
-      link.classList.toggle("text-slate-lightest", isActive);
-      link.classList.toggle("text-slate", !isActive);
-      const line = link.querySelector<HTMLSpanElement>(".nav-line");
-      if (line) {
-        line.classList.toggle("w-16", isActive);
-        line.classList.toggle("bg-slate-lightest", isActive);
-        line.classList.toggle("w-8", !isActive);
-        line.classList.toggle("bg-slate", !isActive);
-      }
-    });
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id);
-        }
-      });
-    },
-    { rootMargin: "-40% 0px -55% 0px" },
+  const sections = Array.from(
+    document.querySelectorAll<HTMLElement>("section[id]"),
+  );
+  const navLinks = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("a[data-section]"),
   );
 
-  sections.forEach((s) => observer.observe(s));
+  if (sections.length > 0 && navLinks.length > 0) {
+    /** Ids of the sections currently crossing the detection band. */
+    const sectionsInBand = new Set<string>();
+
+    function setActive(id: string) {
+      navLinks.forEach((link) => {
+        const isActive = link.dataset.section === id;
+        // `data-active` drives every visual state, so the stylesheet stays the
+        // single source of truth and no longer fights the hover utilities.
+        link.toggleAttribute("data-active", isActive);
+        // "location" is the ARIA token for the current spot within a page.
+        if (isActive) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
+    }
+
+    function resolveActive() {
+      const inBand = sections.find((section) => sectionsInBand.has(section.id));
+      if (inBand) {
+        setActive(inBand.id);
+        return;
+      }
+
+      // Nothing is crossing the band: at the very top, past the last section,
+      // or mid fast-scroll. Fall back to the last section already scrolled past
+      // so the indicator never gets stuck on a stale entry.
+      const bandTop = window.innerHeight * BAND_TOP_RATIO;
+      const passed = sections.filter(
+        (section) => section.getBoundingClientRect().top <= bandTop,
+      );
+      setActive((passed.at(-1) ?? sections[0]).id);
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) sectionsInBand.add(entry.target.id);
+          else sectionsInBand.delete(entry.target.id);
+        });
+        resolveActive();
+      },
+      { rootMargin: ROOT_MARGIN },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    resolveActive();
+  }
 </script>
