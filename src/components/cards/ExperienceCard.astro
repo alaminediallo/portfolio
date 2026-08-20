@@ -16,10 +16,10 @@ const t = useTranslations(lang);
 ---
 
 <li
-  class="group relative grid pb-1 transition-all duration-200 sm:grid-cols-8 sm:gap-8 md:gap-4 lg:group-hover/list:opacity-50 lg:hover:opacity-100!"
+  class="group ease-out-quad relative grid pb-1 transition-opacity duration-200 sm:grid-cols-8 sm:gap-8 md:gap-4 lg:group-hover/list:opacity-50 lg:hover:opacity-100!"
 >
   <div
-    class="lg:group-hover:bg-navy-light absolute -inset-4 z-0 hidden rounded-md transition-all duration-200 lg:block lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"
+    class="lg:group-hover:bg-navy-light ease-out-quad absolute -inset-4 z-0 hidden rounded-md transition-[background-color,box-shadow] duration-200 lg:block lg:group-hover:shadow-lg lg:group-hover:inset-shadow-[0_1px_0_0_rgba(148,163,184,0.1)]"
   >
   </div>
 
@@ -32,7 +32,7 @@ const t = useTranslations(lang);
   <div class="z-10 sm:col-span-6">
     <h3 class="text-slate-lightest leading-snug font-medium">
       <a
-        class="group/link text-slate-lightest hover:text-teal focus-visible:text-teal inline-flex items-baseline gap-1 leading-tight font-medium"
+        class="group/link focus-ring ease-out-quad text-slate-lightest hover:text-teal focus-visible:text-teal inline-flex items-baseline gap-1 leading-tight font-medium transition-[color] duration-150"
         href={entry.data.wip ? "#" : entry.data.url}
         {...entry.data.wip
           ? { "data-wip": "true" }
