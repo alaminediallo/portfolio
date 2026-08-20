@@ -10,6 +10,13 @@
   --color-slate-lightest: #e2e8f0;
   --color-white: #f0f5ff;
   --color-teal: #64ffda;
+
+  /* Motion easing.
+     ease-out for anything entering, leaving or responding to a pointer:
+     the fast start reads as instant feedback.
+     ease-in-out for elements already on screen that move or morph. */
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
 @theme inline {
@@ -17,6 +24,12 @@
   --font-sans: var(--font-inter);
   --font-display: var(--font-inknut-antiqua);
 }
+
+/* Duration scale used across the site:
+     150ms  micro-interactions (colour, small icon nudges)
+     200ms  standard UI (cards, nav, hover panels)
+     300ms  larger surfaces (modal, image filters)
+   Anything above 300ms is a smell in a portfolio this dense. */
 
 @layer base {
   html {
@@ -36,5 +49,35 @@
   th {
     font-family: var(--font-display);
     text-wrap: balance;
+  }
+}
+
+/* Shared focus ring so every interactive element gets the same visible
+   keyboard affordance. Applied as a utility rather than a base rule so
+   components opt in explicitly. */
+@utility focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 3px;
+  }
+}
+
+/* Reduced-motion safety net.
+   Deliberately unlayered: unlayered declarations outrank everything inside
+   @layer, so this beats Tailwind's utilities without needing !important.
+   Durations are near-zero rather than `none` so transitionend/discrete
+   transitions (the modal's `transition-behavior: allow-discrete`) still fire. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
   }
 }
