@@ -2,7 +2,7 @@
 title: "Liver App"
 type: "featured"
 url: "https://liver-app.com"
-image: "/images/projects/liver-app.webp"
+image: "../../../assets/projects/liver-app.webp"
 tech: ["React", "TypeScript", "TanStack Query", "Shadcn"]
 date: "2026-05-01"
 ---

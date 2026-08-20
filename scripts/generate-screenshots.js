@@ -2,10 +2,9 @@ import puppeteer from "puppeteer";
 import sharp from "sharp";
 import matter from "gray-matter";
 import { readFileSync, readdirSync, mkdirSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, relative, resolve } from "node:path";
 
 const PROJECTS_DIR = "src/content/projects";
-const PUBLIC_DIR = "public";
 
 function walkMd(dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
@@ -21,7 +20,13 @@ const seen = new Set();
 const projects = files
   .map((f) => {
     const { data } = matter(readFileSync(f, "utf8"));
-    return { title: data.title, url: data.url, image: data.image };
+    // Frontmatter image paths are relative to their markdown file so Astro's
+    // image() schema helper can resolve them, so resolve from the same base.
+    return {
+      title: data.title,
+      url: data.url,
+      image: data.image ? resolve(dirname(f), data.image) : undefined,
+    };
   })
   .filter((p) => p.url && p.image)
   .filter((p) => {
@@ -39,15 +44,14 @@ for (const { title, url, image } of projects) {
 
   const buffer = await page.screenshot({ encoding: "binary" });
 
-  const output = join(PUBLIC_DIR, image.replace(/^\//, ""));
-  mkdirSync(dirname(output), { recursive: true });
+  mkdirSync(dirname(image), { recursive: true });
 
   await sharp(buffer)
     .resize(800, 450)
     .webp({ quality: 90 })
-    .toFile(output);
+    .toFile(image);
 
-  console.log(`Generated ${image} (${title})`);
+  console.log(`Generated ${relative(process.cwd(), image)} (${title})`);
   await page.close();
 }
 

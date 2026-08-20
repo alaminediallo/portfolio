@@ -3,7 +3,7 @@ title: "Desserts App"
 type: "featured"
 url: "https://desserts-app-six.vercel.app/"
 github: "https://github.com/alaminediallo/desserts-app"
-image: "/images/projects/desserts-app.webp"
+image: "../../../assets/projects/desserts-app.webp"
 tech: ["React", "TypeScript", "TailwindCSS", "Zustand"]
 date: "2024-09-01"
 ---

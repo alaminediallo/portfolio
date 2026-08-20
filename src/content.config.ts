@@ -17,15 +17,19 @@ const experience = defineCollection({
 
 const projects = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
-  schema: z.object({
-    title: z.string(),
-    type: z.enum(["featured", "other"]),
-    url: z.url().optional(),
-    github: z.url().optional(),
-    image: z.string(),
-    tech: z.array(z.string()),
-    date: z.coerce.date(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      type: z.enum(["featured", "other"]),
+      url: z.url().optional(),
+      github: z.url().optional(),
+      // image() resolves the relative path to an ImageMetadata object, which is
+      // what lets <Image /> emit width variants. A plain string would be passed
+      // through untouched.
+      image: image(),
+      tech: z.array(z.string()),
+      date: z.coerce.date(),
+    }),
 });
 
 // const writing = defineCollection({
