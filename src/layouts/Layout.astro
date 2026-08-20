@@ -14,25 +14,86 @@ const lang = getLangFromUrl(Astro.url);
     <BaseHead {...Astro.props} />
   </head>
   <body>
-    <div
-      id="cursor-glow"
-      class="pointer-events-none fixed inset-0 z-30 transition-[background] duration-300"
-      aria-hidden="true"
-    >
-    </div>
+    <div id="cursor-glow" class="cursor-glow" aria-hidden="true"></div>
 
     <slot />
 
     <WIPModal />
 
-    <script>
-      if (window.matchMedia("(pointer: fine)").matches) {
-        const glow = document.getElementById("cursor-glow");
-        if (glow) {
-          document.addEventListener("mousemove", (e) => {
-            glow.style.background = `radial-gradient(600px at ${e.clientX}px ${e.clientY}px, rgba(29, 78, 216, 0.15), transparent 80%)`;
-          });
+    <style>
+      /* Fixed-size blob moved with translate3d so the pointer trail stays on
+         the compositor. Writing a radial-gradient into `background` on a
+         full-viewport layer, as this did before, repainted the whole page on
+         every mousemove. The gradient itself is now static. */
+      .cursor-glow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 30;
+        width: 1200px;
+        height: 1200px;
+        pointer-events: none;
+        opacity: 0;
+        background: radial-gradient(
+          circle 600px at center,
+          rgba(29, 78, 216, 0.15),
+          transparent 80%
+        );
+        transition: opacity 300ms var(--ease-out-quad);
+        will-change: transform;
+      }
+
+      .cursor-glow[data-visible] {
+        opacity: 1;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .cursor-glow {
+          display: none;
         }
+      }
+    </style>
+
+    <script>
+      /** Half the blob size, so the gradient stays centred on the cursor. */
+      const GLOW_OFFSET = 600;
+
+      const glow = document.getElementById("cursor-glow");
+      const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      if (glow && hasFinePointer && !prefersReducedMotion) {
+        // Narrowed alias so the rAF callback does not need a non-null assertion.
+        const element = glow;
+
+        let pointerX = 0;
+        let pointerY = 0;
+        let frameId = 0;
+        let isVisible = false;
+
+        function paintGlow() {
+          frameId = 0;
+          element.style.transform = `translate3d(${pointerX - GLOW_OFFSET}px, ${pointerY - GLOW_OFFSET}px, 0)`;
+        }
+
+        document.addEventListener(
+          "mousemove",
+          (event) => {
+            pointerX = event.clientX;
+            pointerY = event.clientY;
+
+            if (!isVisible) {
+              isVisible = true;
+              element.dataset.visible = "";
+            }
+
+            // Coalesce bursts of mousemove into a single write per frame.
+            if (!frameId) frameId = requestAnimationFrame(paintGlow);
+          },
+          { passive: true },
+        );
       }
     </script>
     <script>
