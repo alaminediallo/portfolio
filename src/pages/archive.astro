@@ -54,7 +54,7 @@ const t = useTranslations(lang);
                         href={entry.url ?? entry.repo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="group/link inline-flex items-baseline font-medium leading-tight text-slate-200 text-base hover:text-teal-300"
+                        class="group/link focus-ring ease-out-quad inline-flex items-baseline text-base leading-tight font-medium text-slate-200 transition-[color] duration-150 hover:text-teal-300"
                       >
                         <span class="inline-block">
                           {entry.title}
@@ -95,7 +95,7 @@ const t = useTranslations(lang);
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={t("card.live.aria", { title: entry.title })}
-                      class="group/link inline-flex items-baseline text-sm text-slate-400 hover:text-teal-300"
+                      class="group/link focus-ring ease-out-quad inline-flex items-baseline text-sm text-slate-400 transition-[color] duration-150 hover:text-teal-300"
                     >
                       <span class="inline-block whitespace-nowrap">
                         {new URL(entry.url).hostname.replace("www.", "")}
@@ -111,7 +111,7 @@ const t = useTranslations(lang);
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={t("card.repo.aria", { title: entry.title })}
-                      class="text-slate hover:text-teal transition-colors"
+                      class="text-slate hover:text-teal focus-ring ease-out-quad transition-[color] duration-150"
                     >
                       <IconGitHub class="size-5 shrink-0" />
                     </a>
