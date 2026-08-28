@@ -4,7 +4,7 @@ Personal portfolio of Mamadou Lamine Diallo, live at [laminediallo.me](https://b
 
 ## Stack
 
-Astro 6 with Tailwind CSS 4 and TypeScript. Static output, no runtime framework. Fonts are downloaded at build via the Astro font API (Bunny provider) and served locally, so no third-party request is made at view time.
+Astro 7 with Tailwind CSS 4 and TypeScript. Static output, no runtime framework. Fonts are downloaded at build via the Astro font API (Bunny provider) and served locally, so no third-party request is made at view time.
 
 ## Run locally
 
@@ -29,7 +29,7 @@ Then open `localhost:4321`.
 ```
 src/
   components/   cards/, icons/, sections/, ui/, and top-level shared components
-  content/      Project, experience, and about entries — each split into en/ and fr/
+  content/      Project, experience, and about entries, each split into en/ and fr/
   data/         Site metadata and manual archive list
   i18n/         Translation strings and locale utilities
   layouts/      Page shell

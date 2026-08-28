@@ -8,4 +8,4 @@ tech: ["Astro", "TypeScript", "TailwindCSS"]
 date: "2026-04-19"
 ---
 
-Yes, this site. Built with Astro 6, Tailwind 4, and TypeScript. Static output, content collections for projects and experience, and locally-served fonts so no third-party request.
+Yes, this site. Built with Astro 7, Tailwind 4, and TypeScript. Static output, content collections for projects and experience, and locally-served fonts so no third-party request.
