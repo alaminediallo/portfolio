@@ -17,27 +17,23 @@ const entries = (Object.keys(languages) as Array<keyof typeof languages>).map(
 ---
 
 <nav aria-label={t("lang.aria")} class="mt-6">
-  <div
-    class="border-slate/30 inline-flex border text-xs font-bold tracking-widest uppercase"
-  >
-    {
-      entries.map((entry) => (
-        <a
-          href={entry.href}
-          data-lang={entry.lang}
-          aria-current={entry.isActive ? "true" : undefined}
-          aria-label={entry.full}
-          class:list={[
-            "lang-switch-link focus-ring ease-out-quad px-3 py-1 transition-[color,background-color,scale] duration-150 active:scale-95",
-            entry.isActive
-              ? "bg-slate-lightest text-navy"
-              : "text-slate hover:bg-slate/10 hover:text-slate-lightest",
-          ]}
-        >
-          {entry.label}
-        </a>
-      ))
-    }
+  <div class="border-slate/30 inline-flex border text-xs font-bold tracking-widest uppercase">
+    {entries.map((entry) => (
+      <a
+        href={entry.href}
+        data-lang={entry.lang}
+        aria-current={entry.isActive ? "true" : undefined}
+        aria-label={entry.full}
+        class:list={[
+          "lang-switch-link focus-ring ease-out-quad px-3 py-1 transition-[color,background-color,scale] duration-150 active:scale-95",
+          entry.isActive
+            ? "bg-slate-lightest text-navy"
+            : "text-slate hover:bg-slate/10 hover:text-slate-lightest",
+        ]}
+      >
+        {entry.label}
+      </a>
+    ))}
   </div>
 </nav>
 

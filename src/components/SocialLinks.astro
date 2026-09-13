@@ -18,30 +18,28 @@ const t = useTranslations(lang);
 ---
 
 <ul class="mt-10 ml-1 flex items-center md:mt-8" aria-label={t("social.aria")}>
-  {
-    SITE.socials.map((social) => {
-      const Icon = iconMap[social.icon];
-      const isMailto = social.href.startsWith("mailto:");
-      const ariaLabel = isMailto
-        ? t("social.email.aria", { label: social.label })
-        : t("social.link.aria", { label: social.label });
-      return (
-        <li class="mr-5 shrink-0 text-xs">
-          <a
-            href={social.href}
-            target={isMailto ? undefined : "_blank"}
-            rel={isMailto ? undefined : "noopener noreferrer"}
-            aria-label={ariaLabel}
-            title={social.label}
-            class="focus-ring ease-out-quad block text-slate-400 transition-[color,scale] duration-150 hover:text-teal-300 active:scale-95"
-            data-umami-event="social-click"
-            data-umami-event-platform={social.icon}
-          >
-            <span class="sr-only">{social.label}</span>
-            <Icon class="size-6" />
-          </a>
-        </li>
-      );
-    })
-  }
+  {SITE.socials.map((social) => {
+    const Icon = iconMap[social.icon];
+    const isMailto = social.href.startsWith("mailto:");
+    const ariaLabel = isMailto
+      ? t("social.email.aria", { label: social.label })
+      : t("social.link.aria", { label: social.label });
+    return (
+      <li class="mr-5 shrink-0 text-xs">
+        <a
+          href={social.href}
+          target={isMailto ? undefined : "_blank"}
+          rel={isMailto ? undefined : "noopener noreferrer"}
+          aria-label={ariaLabel}
+          title={social.label}
+          class="focus-ring ease-out-quad block text-slate-400 transition-[color,scale] duration-150 hover:text-teal-300 active:scale-95"
+          data-umami-event="social-click"
+          data-umami-event-platform={social.icon}
+        >
+          <span class="sr-only">{social.label}</span>
+          <Icon class="size-6" />
+        </a>
+      </li>
+    );
+  })}
 </ul>

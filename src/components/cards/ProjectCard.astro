@@ -18,71 +18,62 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<li
-  class="group ease-out-quad relative grid gap-4 pb-1 transition-opacity duration-200 sm:grid-cols-8 sm:gap-8 md:gap-4 lg:group-hover/list:opacity-50 lg:hover:opacity-100!"
->
-  <div
-    class="ease-out-quad absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition-[background-color,box-shadow] duration-200 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-lg lg:group-hover:inset-shadow-[0_1px_0_0_rgba(148,163,184,0.1)]"
-  >
-  </div>
+<li class="group ease-out-quad relative grid gap-4 pb-1 transition-opacity duration-200 sm:grid-cols-8 sm:gap-8 md:gap-4 lg:group-hover/list:opacity-50 lg:hover:opacity-100!">
+  <div class="ease-out-quad absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition-[background-color,box-shadow] duration-200 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-lg lg:group-hover:inset-shadow-[0_1px_0_0_rgba(148,163,184,0.1)]"></div>
 
   <div class="z-10 order-2 sm:col-span-6">
     <!-- Title with arrow icon inline -->
     <div class="flex items-start justify-between gap-2">
       <h3 class="text-slate-lightest leading-snug font-medium">
-        {
-          cardUrl ? (
-            <a
-              href={cardUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group/link focus-ring ease-out-quad text-slate-lightest hover:text-teal focus-visible:text-teal inline-flex items-baseline gap-1 leading-tight font-medium transition-[color] duration-150"
-              data-umami-event="project-live"
-              data-umami-event-project={entry.data.title}
-            >
-              <span
-                class="absolute -inset-4 hidden rounded md:block"
-                aria-hidden="true"
-              />
-              {entry.data.title}
-              <IconArrowUp class="ml-1 inline-block size-4 shrink-0 translate-y-0.5 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-0.5 group-focus-visible/link:translate-x-1 group-focus-visible/link:-translate-y-0.5" />
-            </a>
-          ) : (
-            entry.data.title
-          )
-        }
+        {cardUrl ? (
+          <a
+            href={cardUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group/link focus-ring ease-out-quad text-slate-lightest hover:text-teal focus-visible:text-teal inline-flex items-baseline gap-1 leading-tight font-medium transition-[color] duration-150"
+            data-umami-event="project-live"
+            data-umami-event-project={entry.data.title}
+          >
+            <span
+              class="absolute -inset-4 hidden rounded md:block"
+              aria-hidden="true"
+            />
+            {entry.data.title}
+            <IconArrowUp class="ml-1 inline-block size-4 shrink-0 translate-y-0.5 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-0.5 group-focus-visible/link:translate-x-1 group-focus-visible/link:-translate-y-0.5" />
+          </a>
+        ) : (
+          entry.data.title
+        )}
       </h3>
       <div>
-        {
-          entry.data.github && (
-            <div class="relative z-10">
-              <a
-                href={entry.data.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={t("card.github.aria", { title: entry.data.title })}
-                class="text-slate hover:text-teal focus-ring ease-out-quad transition-[color] duration-150"
-                data-umami-event="project-github"
-                data-umami-event-project={entry.data.title}
-              >
-                <IconGitHub class="size-5" />
-              </a>
-            </div>
-          )
-        }
+        {entry.data.github && (
+          <div class="relative z-10">
+            <a
+              href={entry.data.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t("card.github.aria", { title: entry.data.title })}
+              class="text-slate hover:text-teal focus-ring ease-out-quad transition-[color] duration-150"
+              data-umami-event="project-github"
+              data-umami-event-project={entry.data.title}
+            >
+              <IconGitHub class="size-5" />
+            </a>
+          </div>
+        )}
       </div>
     </div>
 
     <!-- Description -->
-    <div
-      class="text-slate [&_a]:text-slate-lightest [&_a:hover]:text-teal mt-2 text-sm leading-normal [&_a]:font-medium"
-    >
+    <div class="text-slate [&_a]:text-slate-lightest [&_a:hover]:text-teal mt-2 text-sm leading-normal [&_a]:font-medium">
       <Content />
     </div>
 
     <!-- Tags -->
     <ul class="mt-5 flex flex-wrap gap-2" aria-label={t("tech.aria")}>
-      {entry.data.tech.map((tech) => <Tag label={tech} />)}
+      {entry.data.tech.map((tech) => (
+        <Tag label={tech} />
+      ))}
     </ul>
   </div>
 

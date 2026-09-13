@@ -13,9 +13,7 @@ const homeHref = localizedPath(lang, "/");
 <div class="flex h-full flex-col justify-between">
   <div>
     <a href={homeHref} class="block">
-      <h1
-        class="text-slate-lightest text-4xl font-bold tracking-tight sm:text-5xl"
-      >
+      <h1 class="text-slate-lightest text-4xl font-bold tracking-tight sm:text-5xl">
         {SITE.name}
       </h1>
     </a>
@@ -23,9 +21,7 @@ const homeHref = localizedPath(lang, "/");
     <h2 class="text-slate-lightest mt-3 text-lg font-medium tracking-tight">
       {t("site.title")}
     </h2>
-    <p class="text-slate mt-4 max-w-xs leading-normal">
-      {t("site.tagline")}
-    </p>
+    <p class="text-slate mt-4 max-w-xs leading-normal">{t("site.tagline")}</p>
 
     <LangSwitcher />
 

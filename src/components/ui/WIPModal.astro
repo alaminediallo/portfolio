@@ -5,15 +5,14 @@
   aria-modal="true"
   aria-labelledby="wip-modal-title"
 >
-  <div id="wip-backdrop" class="absolute inset-0 bg-slate-900/75 backdrop-blur" />
-
   <div
-    class="wip-card relative w-full max-w-sm rounded-lg border border-slate-300/10 bg-slate-900/75 p-6 shadow-2xl"
-  >
+    id="wip-backdrop"
+    class="absolute inset-0 bg-slate-900/75 backdrop-blur"
+  />
+
+  <div class="wip-card relative w-full max-w-sm rounded-lg border border-slate-300/10 bg-slate-900/75 p-6 shadow-2xl">
     <div class="mb-4 flex items-center gap-3">
-      <div
-        class="bg-teal/10 flex size-10 shrink-0 items-center justify-center rounded-full"
-      >
+      <div class="bg-teal/10 flex size-10 shrink-0 items-center justify-center rounded-full">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -36,13 +35,17 @@
         class="text-slate-lightest font-display text-lg font-semibold"
       >
         <span data-wip-lang="en">We're cooking</span>
-        <span data-wip-lang="fr" class="hidden">Ça mijote</span>
+        <span data-wip-lang="fr" class="hidden">
+          Ça mijote
+        </span>
       </h2>
     </div>
 
     <p class="text-slate mb-6 text-sm leading-relaxed">
       <span data-wip-lang="en">INLER's website is on its way. Stay tuned!</span>
-      <span data-wip-lang="fr" class="hidden">Le site d'INLER arrive bientôt. Stay tuned !</span>
+      <span data-wip-lang="fr" class="hidden">
+        Le site d'INLER arrive bientôt. Stay tuned !
+      </span>
     </p>
 
     <button
@@ -50,7 +53,9 @@
       class="text-teal border-teal/30 hover:bg-teal/10 focus-visible:ring-teal/50 w-full cursor-pointer rounded border px-4 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none"
     >
       <span data-wip-lang="en">Got it</span>
-      <span data-wip-lang="fr" class="hidden">Compris</span>
+      <span data-wip-lang="fr" class="hidden">
+        Compris
+      </span>
     </button>
   </div>
 </div>

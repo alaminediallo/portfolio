@@ -2,11 +2,7 @@
 import "@/styles/global.css";
 import { SITE } from "@/data/site";
 import { Font } from "astro:assets";
-import {
-  alternatePath,
-  getLangFromUrl,
-  useTranslations,
-} from "@/i18n/utils";
+import { alternatePath, getLangFromUrl, useTranslations } from "@/i18n/utils";
 
 export type Props = {
   title?: string;
@@ -108,22 +104,24 @@ const frHref = new URL(alternatePath(Astro.url, "fr"), Astro.site);
 <meta name="generator" content={Astro.generator} />
 
 {websiteId && (
-  <script
-    is:inline
-    defer
-    src="https://bip.laminediallo.me/bip"
-    data-website-id={websiteId}
-    data-domains="laminediallo.me"
-    data-exclude-hash="true"
-    data-performance="true"
-  ></script>
-  <script
-    is:inline
-    defer
-    src="https://bip.laminediallo.me/recorder.js"
-    data-website-id={websiteId}
-    data-sample-rate="1"
-    data-mask-level="moderate"
-    data-max-duration="300000"
-  ></script>
+  <>
+    <script
+      is:inline
+      defer
+      src="https://bip.laminediallo.me/bip"
+      data-website-id={websiteId}
+      data-domains="laminediallo.me"
+      data-exclude-hash="true"
+      data-performance="true"
+    ></script>
+    <script
+      is:inline
+      defer
+      src="https://bip.laminediallo.me/recorder.js"
+      data-website-id={websiteId}
+      data-sample-rate="1"
+      data-mask-level="moderate"
+      data-max-duration="300000"
+    ></script>
+  </>
 )}
