@@ -8,6 +8,8 @@ Astro 7 with Tailwind CSS 4 and TypeScript. Static output, no runtime framework.
 
 ## Run locally
 
+Requires Node 26+ and pnpm 12+.
+
 ```sh
 pnpm install
 pnpm dev
@@ -28,6 +30,7 @@ Then open `localhost:4321`.
 
 ```
 src/
+  assets/       Project images, resolved at build by the image() schema
   components/   cards/, icons/, sections/, ui/, and top-level shared components
   content/      Project, experience, and about entries, each split into en/ and fr/
   data/         Site metadata and manual archive list
@@ -35,10 +38,10 @@ src/
   layouts/      Page shell
   pages/        Routes (index, archive, 404, 50x) mirrored under fr/
   styles/       Global Tailwind layer
-public/         Static assets (favicons, OG image, project images, resume PDF)
+public/         Static assets (favicons, OG image, resume PDF)
 ```
 
-Adding a new project: drop a markdown file in `src/content/projects/en/` (and optionally `fr/`) and an image in `public/images/projects/`. The schema in `src/content.config.ts` enforces all fields at build time. Mark an experience entry `wip: true` to show a WIPModal instead of navigating on link click.
+Adding a new project: drop a markdown file in `src/content/projects/en/` (and optionally `fr/`) and an image in `src/assets/projects/`, referenced by a relative path in the frontmatter. The schema in `src/content.config.ts` enforces all fields at build time. Mark an experience entry `wip: true` to show a WIPModal instead of navigating on link click.
 
 ## Credits
 
