@@ -2,7 +2,7 @@ import type { UIKey } from "@/i18n/ui";
 
 export const SITE = {
   name: "Mamadou Lamine Diallo",
-  resumeUrl: "cv/resume.pdf",
+  resumeUrl: "/cv/resume.pdf",
   nav: [
     { key: "nav.about" as UIKey, href: "#about" },
     { key: "nav.experience" as UIKey, href: "#experience" },
