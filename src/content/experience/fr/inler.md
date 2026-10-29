@@ -8,4 +8,4 @@ tech: ["React", "React Native", "Expo", "TypeScript", "TailwindCSS"]
 wip: true
 ---
 
-4 interfaces web React et 2 applications mobiles iOS/Android développées en React Native, dont une soumise à l'App Store. Travail sur le cycle complet, de l'intégration Figma à l'optimisation des performances, en collaboration avec les équipes design et back-end.
+4 interfaces web React et 2 applications mobiles iOS/Android développées en React Native, dont une publiée sur l'App Store. J'intègre les maquettes Figma et j'optimise les performances avec les équipes design et back-end.

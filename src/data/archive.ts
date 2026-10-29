@@ -10,6 +10,13 @@ export type ArchiveEntry = {
 export const archive: ArchiveEntry[] = [
   {
     year: 2026,
+    title: "Liver App",
+    org: "Inler",
+    tech: ["React Native", "Expo", "TypeScript", "Reanimated"],
+    url: "https://apps.apple.com/app/id6815637516",
+  },
+  {
+    year: 2026,
     title: "Liver Web",
     org: "Inler",
     tech: ["React", "TypeScript", "TanStack Query", "Shadcn"],
