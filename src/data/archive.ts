@@ -10,7 +10,7 @@ export type ArchiveEntry = {
 export const archive: ArchiveEntry[] = [
   {
     year: 2026,
-    title: "Liver App",
+    title: "Liver Web",
     org: "Inler",
     tech: ["React", "TypeScript", "TanStack Query", "Shadcn"],
     url: "https://liver-app.com",

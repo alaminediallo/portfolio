@@ -1,8 +1,8 @@
 ---
-title: "Liver App"
+title: "Liver Web"
 type: "featured"
 url: "https://liver-app.com"
-image: "../../../assets/projects/liver-app.webp"
+image: "../../../assets/projects/liver-web.webp"
 tech: ["React", "TypeScript", "TanStack Query", "Shadcn"]
 date: "2026-05-01"
 ---
